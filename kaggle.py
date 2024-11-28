@@ -83,13 +83,13 @@ for file in os.listdir(Test):
         img_array = np.array(img)/255.0
         Test_Data.append(img_array)
 Test_Images = np.array(Test_Data)
-Test_Images[0].shape
+print(Test_Images[0].shape)
 
 model.evaluate(Validation_Data)
 
 plt.figure(figsize=(10,10))
-for i in range(9):
-    plt.subplot(3,3,i+1)
+for i in range(16):
+    plt.subplot(4,4,i+1)
     t=random.randint(1,Test_Images.shape[0]-1)
     EachImage = np.expand_dims(Test_Images[t], axis=0)
     prediction = model.predict(EachImage)
