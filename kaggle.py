@@ -20,15 +20,7 @@ warnings.filterwarnings('ignore')
 Train = os.path.join(os.getcwd(), "train")
 Test = os.path.join(os.getcwd(), "test")
 
-Test_Data=[]
-for file in os.listdir(Test):
-    if file.endswith('.jpg'):
-        img_path = os.path.join(Test, file)
-        img = Image.open(img_path)
-        img = img.resize((128, 128))
-        img_array = np.array(img)/255.0
-        Test_Data.append(img_array)
-Test_Images = np.array(Test_Data)
+
 
 IMAGE_SIZE = 128
 NUM_CLASSES = 33
@@ -82,6 +74,15 @@ print(model.summary())
 
 History = model.fit(Train_Data, validation_data=Validation_Data, epochs=2)
 
+Test_Data=[]
+for file in os.listdir(Test):
+    if file.endswith('.jpg'):
+        img_path = os.path.join(Test, file)
+        img = Image.open(img_path)
+        img = img.resize((128, 128))
+        img_array = np.array(img)/255.0
+        Test_Data.append(img_array)
+Test_Images = np.array(Test_Data)
 Test_Images[0].shape
 
 model.evaluate(Validation_Data)
@@ -97,6 +98,8 @@ for i in range(9):
     plt.title(predicted_label)
     plt.imshow(Test_Images[t])
     plt.axis('off')
+    
+plt.show()
 
 
 
